@@ -25,7 +25,7 @@ function Player(props) {
 
   React.useEffect(() => {
     getAllAttachments().then(_attachments => setAttachments(_attachments))
-  }, [])
+  }, [playlist])
 
   const urls = files.filter(file => playlist.includes(file.id) && attachments[file.id]).map(file => {
     return URL.createObjectURL(attachments[file.id].blob)
