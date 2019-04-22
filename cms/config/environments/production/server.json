@@ -1,0 +1,20 @@
+{
+  "host": "localhost",
+  "port": "${process.env.PORT || 1337}",
+  "production": true,
+  "proxy": {
+    "enabled": true,
+    "ssl": true,
+    "host": "api.foroutreach.com",
+    "port": 443
+  },
+  "autoReload": {
+    "enabled": false
+  },
+  "cron": {
+    "enabled": false
+  },
+  "admin": {
+    "autoOpen": false
+  }
+}

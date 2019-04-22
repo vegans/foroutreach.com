@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/videos",
+      "handler": "Video.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/videos/count",
+      "handler": "Video.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/videos/:_id",
+      "handler": "Video.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/videos",
+      "handler": "Video.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/videos/:_id",
+      "handler": "Video.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/videos/:_id",
+      "handler": "Video.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

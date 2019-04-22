@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "video",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "video": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": true
+    },
+    "title": {
+      "default": "",
+      "type": "string"
+    },
+    "tags": {
+      "collection": "tag",
+      "via": "videos",
+      "dominant": true
+    }
+  }
+}

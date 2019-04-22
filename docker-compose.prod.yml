@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  api:
+    environment:
+      - NODE_ENV=production
+      - VIRTUAL_HOST=outreach.maxmalm.se,api.foroutreach.com
+      - VIRTUAL_PORT=1337
+      - LETSENCRYPT_HOST=outreach.maxmalm.se,api.foroutreach.com
+      - LETSENCRYPT_EMAIL=benjick@dumfan.net
+    restart: always
+
+  db:
+    restart: always
