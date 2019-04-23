@@ -46,6 +46,7 @@ function Player(props) {
         onEnded={onEnded}
         controls
         autoPlay
+        loop={urls.length === 1}
         src={urls[current]}
         type="video/mp4"
       />
