@@ -23,6 +23,10 @@
       "collection": "tag",
       "via": "videos",
       "dominant": true
+    },
+    "country": {
+      "model": "country",
+      "via": "videos"
     }
   }
 }
