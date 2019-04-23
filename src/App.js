@@ -10,6 +10,11 @@ import Player from './Player'
 function App() {
   const {files, playlist} = useStore()
   const [playerOpen, setPlayerOpen] = React.useState(false)
+  React.useEffect(() => {
+    if (playlist.length === 0) {
+      setPlayerOpen(false)
+    }
+  }, [playlist])
   return (
     <>
       <AppBar />
