@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {useStore} from './hooks/useAppState'
 import {db} from './db'
 
@@ -6,15 +6,15 @@ const getAllAttachments = async () => {
   const allDocs = await db.allDocs({
     binary: true,
     include_docs: true,
-    attachments: true
+    attachments: true,
   })
   const attachments = allDocs.rows.map(item => ({
     id: item.id,
-    blob: item.doc._attachments['movie.mp4'].data
+    blob: item.doc._attachments['movie.mp4'].data,
   }))
   return attachments.reduce((result, item) => {
-    result[item.id] = item;
-    return result;
+    result[item.id] = item
+    return result
   }, {})
 }
 
@@ -27,9 +27,11 @@ function Player(props) {
     getAllAttachments().then(_attachments => setAttachments(_attachments))
   }, [playlist])
 
-  const urls = files.filter(file => playlist.includes(file.id) && attachments[file.id]).map(file => {
-    return URL.createObjectURL(attachments[file.id].blob)
-  })
+  const urls = files
+    .filter(file => playlist.includes(file.id) && attachments[file.id])
+    .map(file => {
+      return URL.createObjectURL(attachments[file.id].blob)
+    })
   const [current, setCurrent] = React.useState(0)
   const onEnded = () => {
     if (current === urls.length - 1) {
@@ -52,8 +54,7 @@ function Player(props) {
       />
     )
   }
-  return null;
+  return null
 }
 
-
-export default Player;
+export default Player

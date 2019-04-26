@@ -1,5 +1,5 @@
-import React from 'react';
-import Chip from '@material-ui/core/Chip';
+import React from 'react'
+import Chip from '@material-ui/core/Chip'
 import {useStore} from './hooks/useAppState'
 
 function Tags({onVideo, overrideTags}) {
@@ -22,5 +22,4 @@ function Tags({onVideo, overrideTags}) {
   )
 }
 
-
-export default Tags;
+export default Tags

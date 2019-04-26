@@ -1,7 +1,7 @@
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CheckIcon from '@material-ui/icons/Check';
+import React from 'react'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+import CheckIcon from '@material-ui/icons/Check'
 
 function Delete({onClick}) {
   const [clicked, setClicked] = React.useState(false)
