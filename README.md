@@ -1,7 +1,13 @@
-# Outreach movies
+# foroutreach.com [![Build Status](https://travis-ci.org/benjick/foroutreach.com.svg?branch=master)](https://travis-ci.org/benjick/foroutreach.com)
 
 ## Developing
+Frontend
+```
+yarn
+yarn start
+```
 
+Backend
 ```
 docker-compose up
 ```
