@@ -25,7 +25,8 @@
     },
     "Megabytes": {
       "default": "",
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "tags": {
       "collection": "tag",
