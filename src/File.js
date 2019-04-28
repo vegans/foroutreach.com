@@ -12,7 +12,20 @@ import Checkbox from '@material-ui/core/Checkbox'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Delete from './components/Delete'
 import Tooltip from '@material-ui/core/Tooltip'
+import CancelIcon from '@material-ui/icons/Cancel'
 import Typography from '@material-ui/core/Typography'
+
+function ProgressWithCancel({onClick}) {
+  return (
+    <IconButton onClick={onClick}>
+      <CancelIcon
+        color="primary"
+        style={{position: 'absolute', fontSize: 14}}
+      />
+      <CircularProgress color="secondary" size={22} thickness={5} />
+    </IconButton>
+  )
+}
 
 const styles = theme => ({
   expand: {
@@ -37,6 +50,7 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
     removeCachedVideo,
     progress,
     size,
+    cancelDownload,
   } = useCachableVideo({id, video})
   if (!url && !online) {
     return null
@@ -54,9 +68,9 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
   const selected = isPlaylistItem(id)
   return (
     <TableRow selected={selected}>
-      <TableCell padding="none">
+      <TableCell padding="none" style={{verticalAlign: 'top'}}>
         {isDownloading ? (
-          <CircularProgress size={20} style={{margin: 14}} thickness={5} />
+          <ProgressWithCancel onClick={cancelDownload} />
         ) : (
           <Checkbox
             onClick={toggleOrDownload}
