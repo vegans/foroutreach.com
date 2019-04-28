@@ -7,8 +7,8 @@ import ConnectionIcon from '@material-ui/icons/SignalCellular4Bar'
 import NoConnectionIcon from '@material-ui/icons/SignalCellularConnectedNoInternet0Bar'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
-import GithubIcon from './components/GithubIcon'
-import {useStore} from './hooks/useAppState'
+import GithubIcon from './GithubIcon'
+import {useStore} from '../hooks/useAppState'
 
 const styles = {
   root: {

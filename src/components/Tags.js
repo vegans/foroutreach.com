@@ -1,6 +1,6 @@
 import React from 'react'
 import Chip from '@material-ui/core/Chip'
-import {useStore} from './hooks/useAppState'
+import {useStore} from '../hooks/useAppState'
 
 function Tags({onVideo, overrideTags}) {
   const {tags, toggleSelectedTag, selectedTags} = useStore()

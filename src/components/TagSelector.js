@@ -4,7 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Dialog from '@material-ui/core/Dialog'
-import Tags from '../Tags'
+import Tags from './Tags'
 import {useStore} from '../hooks/useAppState'
 
 const TagSelector = props => {

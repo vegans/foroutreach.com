@@ -1,12 +1,12 @@
 import React from 'react'
-import File from './File'
 import {useStore} from './hooks/useAppState'
 import Table from '@material-ui/core/Table'
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
-import AppBar from './AppBar'
+import AppBar from './components/AppBar'
 import TableToobar from './components/TableToolbar'
-import Player from './Player'
+import File from './components/File'
+import Player from './components/Player'
 
 function App() {
   const {files, playlist} = useStore()

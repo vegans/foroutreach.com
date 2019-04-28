@@ -1,6 +1,6 @@
 import React from 'react'
-import {useStore} from './hooks/useAppState'
-import {db} from './db'
+import {useStore} from '../hooks/useAppState'
+import {db} from '../db'
 
 const getAllAttachments = async () => {
   const allDocs = await db.allDocs({

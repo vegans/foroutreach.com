@@ -1,6 +1,6 @@
 import React from 'react'
-import useCachableVideo from './hooks/useCachableVideo'
-import {useStore} from './hooks/useAppState'
+import useCachableVideo from '../hooks/useCachableVideo'
+import {useStore} from '../hooks/useAppState'
 import {withStyles} from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
@@ -8,11 +8,11 @@ import IconButton from '@material-ui/core/IconButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import SaveIcon from '@material-ui/icons/Save'
 import Checkbox from '@material-ui/core/Checkbox'
-import Delete from './components/Delete'
+import Delete from './Delete'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import ReactGA from 'react-ga'
-import ProgressWithCancel from './components/ProgressWithCancel'
+import ProgressWithCancel from './ProgressWithCancel'
 
 const styles = theme => ({
   expand: {
