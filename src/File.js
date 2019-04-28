@@ -10,6 +10,7 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 import Checkbox from '@material-ui/core/Checkbox'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Delete from './components/Delete'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   expand: {
@@ -24,7 +25,7 @@ const styles = theme => ({
   },
 })
 
-function File({id, video, title, thumbnail, tags = [], classes}) {
+function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
   const {isPlaylistItem, togglePlaylistItem, removePlaylistItem} = useStore()
   const {
     download,
@@ -64,9 +65,12 @@ function File({id, video, title, thumbnail, tags = [], classes}) {
       </TableCell>
       <TableCell padding="none" component="th" scope="row" />
       <TableCell padding="none">
-        {title} {progress && `(${progress.toFixed(2)}%)`}
-        {size && `(${size})`}
-        {!progress && isDownloading && `(Processing...)`}
+        <Typography variant="subtitle2">{title}</Typography>
+        <Typography variant="caption">
+          {size ? `${size} ` : `${megabytes} MB `}
+          {progress && `Downloading: ${progress.toFixed(2)}%`}
+          {!progress && isDownloading && `Processing...`}
+        </Typography>
       </TableCell>
       <TableCell padding="none" align="right">
         {tags.map(tag => (
