@@ -110,7 +110,7 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
         <Typography variant="subtitle2">{title}</Typography>
         <div className={classes.seperator}>
           <Typography variant="caption">
-            {size && (
+            {url && (
               <Tooltip
                 placement="right"
                 title="This video is available offline">
@@ -121,7 +121,7 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
                 />
               </Tooltip>
             )}
-            {!isDownloading && (size ? `${size} ` : `${megabytes} MB `)}
+            {!isDownloading && `${size} `}
             {progress && `Downloading...`}
             {!progress && isDownloading && `Processing...`}
           </Typography>
