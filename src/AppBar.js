@@ -53,7 +53,7 @@ function ButtonAppBar(props) {
             <Tooltip title="View source code">
               <IconButton
                 onClick={() =>
-                  window.open('https://github.com/benjick/foroutreach.com')
+                  window.open('https://github.com/vegans/foroutreach.com')
                 }>
                 <GithubIcon nativeColor="#ffffff" />
               </IconButton>
