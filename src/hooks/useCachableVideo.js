@@ -70,14 +70,12 @@ function useCachableVideo({id, video}) {
     } catch (error) {
       setIsDownloading(false)
       if (axios.isCancel(error)) {
-        console.log('Request canceled')
         setProgress(null)
         throw error
       }
     }
   }
   const removeCachedVideo = async () => {
-    console.log('removeCachedVideo')
     try {
       const doc = await db.get(id)
       await db.remove(doc)
