@@ -14,14 +14,20 @@ import Tooltip from '@material-ui/core/Tooltip'
 import CancelIcon from '@material-ui/icons/Cancel'
 import Typography from '@material-ui/core/Typography'
 
-function ProgressWithCancel({onClick}) {
+function ProgressWithCancel({onClick, progress}) {
   return (
     <IconButton onClick={onClick}>
       <CancelIcon
         color="primary"
         style={{position: 'absolute', fontSize: 14}}
       />
-      <CircularProgress color="secondary" size={22} thickness={5} />
+      <CircularProgress
+        variant={progress ? 'determinate' : 'indeterminate'}
+        value={progress}
+        color="secondary"
+        size={22}
+        thickness={5}
+      />
     </IconButton>
   )
 }
@@ -77,7 +83,7 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
     <TableRow selected={selected}>
       <TableCell padding="none" className={classes.icon}>
         {isDownloading ? (
-          <ProgressWithCancel onClick={cancelDownload} />
+          <ProgressWithCancel progress={progress} onClick={cancelDownload} />
         ) : (
           <Checkbox
             onClick={toggleOrDownload}
@@ -101,8 +107,8 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
                 />
               </Tooltip>
             )}
-            {size ? `${size} ` : `${megabytes} MB `}
-            {progress && `Downloading: ${progress.toFixed(2)}%`}
+            {!isDownloading && (size ? `${size} ` : `${megabytes} MB `)}
+            {progress && `Downloading...`}
             {!progress && isDownloading && `Processing...`}
           </Typography>
           <Typography variant="caption">
