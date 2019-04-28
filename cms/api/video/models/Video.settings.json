@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "video",
   "info": {
     "name": "video",
     "description": ""
@@ -19,14 +19,18 @@
       "default": "",
       "type": "string"
     },
+    "country": {
+      "model": "country",
+      "via": "videos"
+    },
+    "Megabytes": {
+      "default": "",
+      "type": "integer"
+    },
     "tags": {
       "collection": "tag",
       "via": "videos",
       "dominant": true
-    },
-    "country": {
-      "model": "country",
-      "via": "videos"
     }
   }
 }
