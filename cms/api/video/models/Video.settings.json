@@ -23,7 +23,7 @@
       "model": "country",
       "via": "videos"
     },
-    "Megabytes": {
+    "megabytes": {
       "default": "",
       "type": "integer",
       "required": true
