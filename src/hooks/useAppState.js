@@ -12,7 +12,7 @@ function useFilelist() {
   const [tags, setTags] = React.useState([])
   const [selectedTags, toggleSelectedTag] = useArray([])
   React.useEffect(() => {
-    fetch(process.env.REACT_APP_API_BASE + '/videos')
+    fetch(process.env.REACT_APP_API_BASE + '/videos?_sort=title:ASC')
       .then(result => result.json())
       .then(_files => {
         setFiles(JSON.stringify(_files))
