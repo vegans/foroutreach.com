@@ -18,6 +18,9 @@
   },
   "parser": {
     "enabled": true,
-    "multipart": true
+    "multipart": true,
+    "formidable": {
+      "maxFileSize": 1073741824
+    }
   }
 }
