@@ -1,5 +1,4 @@
 import React from 'react'
-import classNames from 'classnames'
 import {withStyles} from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -9,6 +8,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import StopIcon from '@material-ui/icons/Stop'
 import {lighten} from '@material-ui/core/styles/colorManipulator'
 import TagSelector from './TagSelector'
+import Badge from '@material-ui/core/Badge'
 
 const toolbarStyles = theme => ({
   root: {
@@ -48,29 +48,22 @@ const TableToobar = props => {
   const {numSelected, classes, playerOpen, setPlayerOpen} = props
 
   return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}>
+    <Toolbar className={classes.root}>
       <div className={classes.innerWrapper}>
         <div className={classes.title}>
-          {numSelected > 0 ? (
-            <Typography color="inherit" variant="subtitle1">
-              {numSelected} videos in playlist
-            </Typography>
-          ) : (
-            <Typography variant="h6" id="tableTitle" />
-          )}
+          <Typography variant="h6" id="tableTitle" />
         </div>
         <div className={classes.spacer} />
         <div className={classes.actions}>
-          {numSelected > 0 && (
-            <Tooltip title="Toggle player">
-              <IconButton onClick={() => setPlayerOpen(!playerOpen)}>
+          <Tooltip title="Toggle player">
+            <IconButton
+              disabled={numSelected === 0}
+              onClick={() => setPlayerOpen(!playerOpen)}>
+              <Badge badgeContent={numSelected} color="secondary">
                 {playerOpen ? <StopIcon /> : <PlayArrowIcon />}
-              </IconButton>
-            </Tooltip>
-          )}
+              </Badge>
+            </IconButton>
+          </Tooltip>
           <TagSelector />
         </div>
       </div>
