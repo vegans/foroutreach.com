@@ -79,6 +79,7 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
     if (!url) {
       event(`Download started`)
       await download()
+      event('Download completed')
     }
     togglePlaylistItem(id)
   }
