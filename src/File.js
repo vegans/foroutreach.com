@@ -22,7 +22,7 @@ function ProgressWithCancel({onClick, progress}) {
         style={{position: 'absolute', fontSize: 14}}
       />
       <CircularProgress
-        variant={progress ? 'determinate' : 'indeterminate'}
+        variant={progress ? 'static' : 'indeterminate'}
         value={progress}
         color="secondary"
         size={22}
