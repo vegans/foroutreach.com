@@ -16,6 +16,10 @@
     "videos": {
       "collection": "video",
       "via": "tags"
+    },
+    "category": {
+      "model": "category",
+      "via": "tags"
     }
   }
 }
