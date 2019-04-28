@@ -8,30 +8,11 @@ import IconButton from '@material-ui/core/IconButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import SaveIcon from '@material-ui/icons/Save'
 import Checkbox from '@material-ui/core/Checkbox'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import Delete from './components/Delete'
 import Tooltip from '@material-ui/core/Tooltip'
-import CancelIcon from '@material-ui/icons/Cancel'
 import Typography from '@material-ui/core/Typography'
 import ReactGA from 'react-ga'
-
-function ProgressWithCancel({onClick, progress}) {
-  return (
-    <IconButton onClick={onClick}>
-      <CancelIcon
-        color="primary"
-        style={{position: 'absolute', fontSize: 14}}
-      />
-      <CircularProgress
-        variant={progress ? 'static' : 'indeterminate'}
-        value={progress}
-        color="secondary"
-        size={22}
-        thickness={5}
-      />
-    </IconButton>
-  )
-}
+import ProgressWithCancel from './components/ProgressWithCancel'
 
 const styles = theme => ({
   expand: {
