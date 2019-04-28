@@ -1,6 +1,5 @@
 import React from 'react'
 import useCachableVideo from './hooks/useCachableVideo'
-import Chip from '@material-ui/core/Chip'
 import {useStore} from './hooks/useAppState'
 import {withStyles} from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
@@ -38,6 +37,14 @@ const styles = theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  seperator: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  icon: {
+    width: 48,
+    justifyContent: 'top',
+  },
 })
 
 function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
@@ -68,7 +75,7 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
   const selected = isPlaylistItem(id)
   return (
     <TableRow selected={selected}>
-      <TableCell padding="none" style={{verticalAlign: 'top'}}>
+      <TableCell padding="none" className={classes.icon}>
         {isDownloading ? (
           <ProgressWithCancel onClick={cancelDownload} />
         ) : (
@@ -79,26 +86,36 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
           />
         )}
       </TableCell>
-      <TableCell padding="none" component="th" scope="row" />
       <TableCell padding="none">
         <Typography variant="subtitle2">{title}</Typography>
-        <Typography variant="caption">
-          {size && (
-            <Tooltip placement="right" title="This video is available offline">
-              <SaveIcon color="secondary" fontSize="inherit" />
-            </Tooltip>
-          )}
-          {size ? ` ${size} ` : ` ${megabytes} MB `}
-          {progress && `Downloading: ${progress.toFixed(2)}%`}
-          {!progress && isDownloading && `Processing...`}
-        </Typography>
+        <div className={classes.seperator}>
+          <Typography variant="caption">
+            {size && (
+              <Tooltip
+                placement="right"
+                title="This video is available offline">
+                <SaveIcon
+                  color="secondary"
+                  fontSize="inherit"
+                  style={{marginRight: 3, marginTop: 2}}
+                />
+              </Tooltip>
+            )}
+            {size ? `${size} ` : `${megabytes} MB `}
+            {progress && `Downloading: ${progress.toFixed(2)}%`}
+            {!progress && isDownloading && `Processing...`}
+          </Typography>
+          <Typography variant="caption">
+            {tags.map((tag, index) => (
+              <React.Fragment key={tag.id}>
+                <span>{tag.name}</span>
+                {index < tags.length - 1 && '/'}
+              </React.Fragment>
+            ))}
+          </Typography>
+        </div>
       </TableCell>
-      <TableCell padding="none" align="right">
-        {tags.map(tag => (
-          <Chip key={tag.id} variant="outlined" label={tag.name} />
-        ))}
-      </TableCell>
-      <TableCell padding="none" align="right">
+      <TableCell padding="none" align="right" className={classes.icon}>
         {url ? (
           <Delete onClick={remove} />
         ) : (
