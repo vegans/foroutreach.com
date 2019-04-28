@@ -4,6 +4,15 @@ import {db} from '../db'
 import axios from 'axios'
 import filesize from 'filesize'
 
+function useCancelToken() {
+  const [source, setSource] = React.useState(axios.CancelToken.source())
+  const cancel = msg => {
+    source.cancel(msg)
+    setSource(axios.CancelToken.source())
+  }
+  return [source.token, cancel]
+}
+
 const putVideo = async (id, blob) => {
   await db.put({
     _id: id,
@@ -31,15 +40,13 @@ export function createRemoteUrl(video) {
 
 function useCachableVideo({id, video}) {
   const [url, setUrl] = React.useState(null)
-  const [realSize, setSize] = React.useState(0)
-  const [source, setSource] = React.useState(axios.CancelToken.source())
-  const size = realSize ? filesize(realSize, {round: 0}) : null
+  const [cancelToken, cancel] = useCancelToken()
+  const size = filesize(video.size * 1024, {round: 0})
   const remoteUrl = createRemoteUrl(video)
   const [progress, setProgress] = React.useState(null)
   const online = useOnlineStatus()
   const [isDownloading, setIsDownloading] = React.useState(false)
   const setBlob = blob => {
-    setSize(blob.size)
     const newUrl = URL.createObjectURL(blob)
     setUrl(newUrl)
   }
@@ -60,7 +67,7 @@ function useCachableVideo({id, video}) {
           const progress = (progressEvent.loaded / progressEvent.total) * 100
           setProgress(progress === 100 ? null : progress)
         },
-        cancelToken: source.token,
+        cancelToken,
       }).then(response => {
         return new Blob([response.data])
       })
@@ -80,14 +87,12 @@ function useCachableVideo({id, video}) {
       const doc = await db.get(id)
       await db.remove(doc)
       setUrl(null)
-      setSize(0)
     } catch (e) {
       console.log('err', e)
     }
   }
   const cancelDownload = async () => {
-    source.cancel('Cancelled by user')
-    setSource(axios.CancelToken.source())
+    cancel()
   }
   React.useEffect(() => {
     checkCached()
