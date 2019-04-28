@@ -29,9 +29,12 @@ const toolbarStyles = theme => ({
   },
   actions: {
     color: theme.palette.text.secondary,
+    display: 'flex',
   },
   title: {
     flex: '0 0 auto',
+    display: 'flex',
+    alignItems: 'center',
   },
   innerWrapper: {
     maxWidth: 600,
@@ -52,26 +55,23 @@ const TableToobar = props => {
       <div className={classes.innerWrapper}>
         <div className={classes.title}>
           {numSelected > 0 ? (
-            <Typography color="inherit" variant="h6">
+            <Typography color="inherit" variant="subtitle1">
               {numSelected} videos in playlist
             </Typography>
           ) : (
-            <Typography variant="h6" id="tableTitle">
-              Select videos below
-            </Typography>
+            <Typography variant="h6" id="tableTitle" />
           )}
         </div>
         <div className={classes.spacer} />
         <div className={classes.actions}>
-          {numSelected > 0 ? (
+          {numSelected > 0 && (
             <Tooltip title="Toggle player">
               <IconButton onClick={() => setPlayerOpen(!playerOpen)}>
                 {playerOpen ? <StopIcon /> : <PlayArrowIcon />}
               </IconButton>
             </Tooltip>
-          ) : (
-            <TagSelector />
           )}
+          <TagSelector />
         </div>
       </div>
     </Toolbar>

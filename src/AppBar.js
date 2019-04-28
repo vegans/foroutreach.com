@@ -21,6 +21,13 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  wrapper: {
+    maxWidth: '600px',
+    margin: '0 auto',
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+  },
 }
 
 function ButtonAppBar(props) {
@@ -30,26 +37,28 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            Outreach movies
-          </Typography>
-          {online ? (
-            <Tooltip title="Online">
-              <ConnectionIcon />
+          <div className={classes.wrapper}>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              Outreach movies
+            </Typography>
+            {online ? (
+              <Tooltip title="Online">
+                <ConnectionIcon />
+              </Tooltip>
+            ) : (
+              <Tooltip title="Offline">
+                <NoConnectionIcon />
+              </Tooltip>
+            )}
+            <Tooltip title="View source code">
+              <IconButton
+                onClick={() =>
+                  window.open('https://github.com/benjick/foroutreach.com')
+                }>
+                <GithubIcon nativeColor="#ffffff" />
+              </IconButton>
             </Tooltip>
-          ) : (
-            <Tooltip title="Offline">
-              <NoConnectionIcon />
-            </Tooltip>
-          )}
-          <Tooltip title="View source code">
-            <IconButton
-              onClick={() =>
-                window.open('https://github.com/benjick/foroutreach.com')
-              }>
-              <GithubIcon nativeColor="#ffffff" />
-            </IconButton>
-          </Tooltip>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

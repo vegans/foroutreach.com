@@ -2,6 +2,7 @@ import React from 'react'
 import File from './File'
 import {useStore} from './hooks/useAppState'
 import Table from '@material-ui/core/Table'
+import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
 import AppBar from './AppBar'
 import TableToobar from './components/TableToolbar'
@@ -18,12 +19,12 @@ function App() {
   return (
     <>
       <AppBar />
-      <TableToobar
-        playerOpen={playerOpen}
-        setPlayerOpen={setPlayerOpen}
-        numSelected={playlist.length}
-      />
-      <div style={{maxWidth: 600, margin: '0 auto'}}>
+      <Paper style={{maxWidth: 600, margin: '0 auto'}}>
+        <TableToobar
+          playerOpen={playerOpen}
+          setPlayerOpen={setPlayerOpen}
+          numSelected={playlist.length}
+        />
         <Player open={playerOpen} />
         <Table>
           <TableBody>
@@ -32,7 +33,7 @@ function App() {
             ))}
           </TableBody>
         </Table>
-      </div>
+      </Paper>
     </>
   )
 }

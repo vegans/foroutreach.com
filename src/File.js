@@ -7,9 +7,11 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
+import SaveIcon from '@material-ui/icons/Save'
 import Checkbox from '@material-ui/core/Checkbox'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Delete from './components/Delete'
+import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
@@ -67,7 +69,12 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
       <TableCell padding="none">
         <Typography variant="subtitle2">{title}</Typography>
         <Typography variant="caption">
-          {size ? `${size} ` : `${megabytes} MB `}
+          {size && (
+            <Tooltip placement="right" title="This video is available offline">
+              <SaveIcon color="secondary" fontSize="inherit" />
+            </Tooltip>
+          )}
+          {size ? ` ${size} ` : ` ${megabytes} MB `}
           {progress && `Downloading: ${progress.toFixed(2)}%`}
           {!progress && isDownloading && `Processing...`}
         </Typography>
