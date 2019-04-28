@@ -7,6 +7,10 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import {Provider} from './hooks/useAppState'
 import theme from './theme'
+import ReactGA from 'react-ga'
+
+ReactGA.initialize('UA-138880673-1')
+ReactGA.pageview('/')
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>

@@ -13,6 +13,7 @@ import Delete from './components/Delete'
 import Tooltip from '@material-ui/core/Tooltip'
 import CancelIcon from '@material-ui/icons/Cancel'
 import Typography from '@material-ui/core/Typography'
+import ReactGA from 'react-ga'
 
 function ProgressWithCancel({onClick, progress}) {
   return (
@@ -65,25 +66,37 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
     size,
     cancelDownload,
   } = useCachableVideo({id, video})
+  const event = action =>
+    ReactGA.event({
+      category: 'File',
+      action,
+      label: `${id} (${title})`,
+    })
   if (!url && !online) {
     return null
   }
   const toggleOrDownload = async () => {
     if (!url) {
+      event(`Download started`)
       await download()
     }
     togglePlaylistItem(id)
   }
   const remove = () => {
+    event(`File removed`)
     removeCachedVideo()
     removePlaylistItem(id)
   }
   const selected = isPlaylistItem(id)
+  const handleCancel = () => {
+    cancelDownload()
+    event('Download cancelled')
+  }
   return (
     <TableRow selected={selected}>
       <TableCell padding="none" className={classes.icon}>
         {isDownloading ? (
-          <ProgressWithCancel progress={progress} onClick={cancelDownload} />
+          <ProgressWithCancel progress={progress} onClick={handleCancel} />
         ) : (
           <Checkbox
             onClick={toggleOrDownload}
