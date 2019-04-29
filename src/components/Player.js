@@ -1,22 +1,6 @@
 import React from 'react'
 import {useStore} from '../hooks/useAppState'
-import {db} from '../db'
-
-const getAllAttachments = async () => {
-  const allDocs = await db.allDocs({
-    binary: true,
-    include_docs: true,
-    attachments: true,
-  })
-  const attachments = allDocs.rows.map(item => ({
-    id: item.id,
-    blob: item.doc._attachments['movie.mp4'].data,
-  }))
-  return attachments.reduce((result, item) => {
-    result[item.id] = item
-    return result
-  }, {})
-}
+import {getAllAttachments} from '../db'
 
 function Player(props) {
   const {open} = props

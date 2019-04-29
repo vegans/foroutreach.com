@@ -6,13 +6,13 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
-import SaveIcon from '@material-ui/icons/Save'
 import Checkbox from '@material-ui/core/Checkbox'
 import Delete from './Delete'
-import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import ReactGA from 'react-ga'
 import ProgressWithCancel from './ProgressWithCancel'
+import Tags from './file/Tags'
+import AvailableIcon from './file/AvailableIcon'
 
 const styles = theme => ({
   expand: {
@@ -91,29 +91,12 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
         <Typography variant="subtitle2">{title}</Typography>
         <div className={classes.seperator}>
           <Typography variant="caption">
-            {url && (
-              <Tooltip
-                placement="right"
-                title="This video is available offline">
-                <SaveIcon
-                  color="secondary"
-                  fontSize="inherit"
-                  style={{marginRight: 3, marginTop: 2}}
-                />
-              </Tooltip>
-            )}
+            <AvailableIcon url={url} />
             {!isDownloading && `${size} `}
             {progress && `Downloading...`}
             {!progress && isDownloading && `Processing...`}
           </Typography>
-          <Typography variant="caption">
-            {tags.map((tag, index) => (
-              <React.Fragment key={tag.id}>
-                <span>{tag.name}</span>
-                {index < tags.length - 1 && '/'}
-              </React.Fragment>
-            ))}
-          </Typography>
+          <Tags tags={tags} />
         </div>
       </TableCell>
       <TableCell padding="none" align="right" className={classes.icon}>
