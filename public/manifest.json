@@ -1,8 +1,8 @@
 {
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "short_name": "Outreach movies",
-  "name": "Outreach movies",
+  "short_name": "A.R.E",
+  "name": "ANIMAL REALITY EXPOSED",
   "display": "standalone",
   "Scope": "/",
   "start_url": ".",

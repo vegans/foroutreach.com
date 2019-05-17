@@ -39,7 +39,7 @@ function ButtonAppBar(props) {
         <Toolbar>
           <div className={classes.wrapper}>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Outreach movies
+              Animal Reality Exposed
             </Typography>
             {online ? (
               <Tooltip title="Online">
