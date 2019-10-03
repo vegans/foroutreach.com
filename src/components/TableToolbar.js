@@ -7,12 +7,12 @@ import Tooltip from '@material-ui/core/Tooltip'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import StopIcon from '@material-ui/icons/Stop'
 import {lighten} from '@material-ui/core/styles/colorManipulator'
-import TagSelector from './TagSelector'
 import Badge from '@material-ui/core/Badge'
+import TagSelector from './TagSelector'
 
 const toolbarStyles = theme => ({
   root: {
-    paddingRight: theme.spacing.unit,
+    paddingRight: theme.spacing(1),
   },
   highlight:
     theme.palette.type === 'light'
@@ -56,13 +56,15 @@ const TableToobar = props => {
         <div className={classes.spacer} />
         <div className={classes.actions}>
           <Tooltip title="Toggle player">
-            <IconButton
-              disabled={numSelected === 0}
-              onClick={() => setPlayerOpen(!playerOpen)}>
-              <Badge badgeContent={numSelected} color="secondary">
-                {playerOpen ? <StopIcon /> : <PlayArrowIcon />}
-              </Badge>
-            </IconButton>
+            <div>
+              <IconButton
+                disabled={numSelected === 0}
+                onClick={() => setPlayerOpen(!playerOpen)}>
+                <Badge badgeContent={numSelected} color="secondary">
+                  {playerOpen ? <StopIcon /> : <PlayArrowIcon />}
+                </Badge>
+              </IconButton>
+            </div>
           </Tooltip>
           <TagSelector />
         </div>

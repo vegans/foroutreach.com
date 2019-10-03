@@ -1,6 +1,6 @@
 import React from 'react'
-import useCachableVideo from '../hooks/useCachableVideo'
-import {useStore} from '../hooks/useAppState'
+import {observer} from 'mobx-react-lite'
+import useOnlineStatus from '../hooks/useOnlineStatus'
 import {withStyles} from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
@@ -35,55 +35,48 @@ const styles = theme => ({
   },
 })
 
-function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
-  const {isPlaylistItem, togglePlaylistItem, removePlaylistItem} = useStore()
-  const {
-    download,
-    online,
-    url,
-    isDownloading,
-    removeCachedVideo,
-    progress,
-    size,
-    cancelDownload,
-  } = useCachableVideo({id, video})
+function File({video, classes}) {
+  const {title, id, localUrl} = video
   const event = action =>
     ReactGA.event({
       category: 'File',
       action,
       label: `${id} (${title})`,
     })
-  if (!url && !online) {
+  const online = useOnlineStatus()
+  if (!localUrl && !online) {
     return null
   }
   const toggleOrDownload = async () => {
-    if (!url) {
+    if (!localUrl) {
       event(`Download started`)
-      await download()
+      await video.download()
       event('Download completed')
+    } else {
+      video.setSelected()
     }
-    togglePlaylistItem(id)
   }
   const remove = () => {
     event(`File removed`)
-    removeCachedVideo()
-    removePlaylistItem(id)
+    video.removeCachedVideo()
   }
-  const selected = isPlaylistItem(id)
   const handleCancel = () => {
-    cancelDownload()
+    video.cancelDownload()
     event('Download cancelled')
   }
   return (
-    <TableRow selected={selected}>
+    <TableRow selected={video.selected}>
       <TableCell padding="none" className={classes.icon}>
-        {isDownloading ? (
-          <ProgressWithCancel progress={progress} onClick={handleCancel} />
+        {video.isDownloading ? (
+          <ProgressWithCancel
+            progress={video.progress}
+            onClick={handleCancel}
+          />
         ) : (
           <Checkbox
             onClick={toggleOrDownload}
-            checked={selected}
-            disabled={isDownloading}
+            checked={video.selected}
+            disabled={video.isDownloading}
           />
         )}
       </TableCell>
@@ -91,19 +84,19 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
         <Typography variant="subtitle2">{title}</Typography>
         <div className={classes.seperator}>
           <Typography variant="caption">
-            <AvailableIcon url={url} />
-            {!isDownloading && `${size} `}
-            {progress && `Downloading...`}
-            {!progress && isDownloading && `Processing...`}
+            <AvailableIcon url={video.remoteUrl} />
+            {!video.isDownloading && `${video.size} `}
+            {video.progress && `Downloading...`}
+            {!video.progress && video.isDownloading && `Processing...`}
           </Typography>
-          <Tags tags={tags} />
+          <Tags tags={video.tags} />
         </div>
       </TableCell>
       <TableCell padding="none" align="right" className={classes.icon}>
-        {url ? (
+        {localUrl ? (
           <Delete onClick={remove} />
         ) : (
-          <IconButton disabled={isDownloading} onClick={download}>
+          <IconButton disabled={video.isDownloading} onClick={video.download}>
             <GetAppIcon />
           </IconButton>
         )}
@@ -112,4 +105,4 @@ function File({id, video, title, thumbnail, megabytes, tags = [], classes}) {
   )
 }
 
-export default withStyles(styles)(File)
+export default withStyles(styles)(observer(File))

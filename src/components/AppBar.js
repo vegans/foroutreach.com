@@ -8,7 +8,7 @@ import NoConnectionIcon from '@material-ui/icons/SignalCellularConnectedNoIntern
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import GithubIcon from './GithubIcon'
-import {useStore} from '../hooks/useAppState'
+import useOnlineStatus from '../hooks/useOnlineStatus'
 
 const styles = {
   root: {
@@ -31,7 +31,7 @@ const styles = {
 }
 
 function ButtonAppBar(props) {
-  const {online} = useStore()
+  const online = useOnlineStatus()
   const {classes} = props
   return (
     <div className={classes.root}>
@@ -55,7 +55,7 @@ function ButtonAppBar(props) {
                 onClick={() =>
                   window.open('https://github.com/vegans/foroutreach.com')
                 }>
-                <GithubIcon nativeColor="#ffffff" />
+                <GithubIcon htmlColor="#ffffff" />
               </IconButton>
             </Tooltip>
           </div>
