@@ -1,20 +1,20 @@
 import React from 'react'
+import {observer} from 'mobx-react-lite'
 import Chip from '@material-ui/core/Chip'
-import {useStore} from '../hooks/useAppState'
+import {useMst} from '../state'
 
 function Tags({onVideo, overrideTags}) {
-  const {tags, toggleSelectedTag, selectedTags} = useStore()
+  const {tags} = useMst()
   return (
     <div style={{padding: 10}}>
-      {tags.map(({id, name}) => {
-        const selected = selectedTags.some(_tag => _tag === id)
+      {tags.map(tag => {
         return (
           <Chip
-            key={id}
+            key={tag.id}
             style={{margin: 5}}
-            onClick={() => toggleSelectedTag(id)}
-            label={name}
-            color={selected ? 'primary' : 'default'}
+            onClick={tag.setSelected}
+            label={tag.name}
+            color={tag.selected ? 'primary' : 'default'}
           />
         )
       })}
@@ -22,4 +22,4 @@ function Tags({onVideo, overrideTags}) {
   )
 }
 
-export default Tags
+export default observer(Tags)

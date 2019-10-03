@@ -1,26 +1,22 @@
 import React from 'react'
-import {useStore} from './hooks/useAppState'
+import {observer} from 'mobx-react-lite'
 import Table from '@material-ui/core/Table'
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
-import AppBar from './components/AppBar'
-import TableToobar from './components/TableToolbar'
-import File from './components/File'
+import TableToolbar from './components/TableToolbar'
 import Player from './components/Player'
+import File from './components/File'
+import AppBar from './components/AppBar'
+import {useMst} from './state'
 
 function App() {
-  const {files, playlist} = useStore()
   const [playerOpen, setPlayerOpen] = React.useState(false)
-  React.useEffect(() => {
-    if (playlist.length === 0) {
-      setPlayerOpen(false)
-    }
-  }, [playlist])
+  const {videos, playlist} = useMst()
   return (
     <>
       <AppBar />
       <Paper style={{maxWidth: 600, margin: '0 auto'}}>
-        <TableToobar
+        <TableToolbar
           playerOpen={playerOpen}
           setPlayerOpen={setPlayerOpen}
           numSelected={playlist.length}
@@ -28,8 +24,8 @@ function App() {
         <Player open={playerOpen} />
         <Table>
           <TableBody>
-            {files.map(file => (
-              <File key={file.id} {...file} />
+            {videos.map(file => (
+              <File key={file.id} video={file} />
             ))}
           </TableBody>
         </Table>
@@ -47,4 +43,4 @@ function App() {
   )
 }
 
-export default App
+export default observer(App)

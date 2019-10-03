@@ -1,18 +1,18 @@
 import React from 'react'
-import {useStore} from '../hooks/useAppState'
 import {getAllAttachments} from '../db'
+import {useMst} from '../state'
 
 function Player(props) {
   const {open} = props
-  const {files, playlist} = useStore()
+  const {playlist} = useMst()
   const [attachments, setAttachments] = React.useState({})
 
   React.useEffect(() => {
     getAllAttachments().then(_attachments => setAttachments(_attachments))
   }, [playlist])
 
-  const urls = files
-    .filter(file => playlist.includes(file.id) && attachments[file.id])
+  const urls = playlist
+    .filter(file => attachments[file.id])
     .map(file => {
       return URL.createObjectURL(attachments[file.id].blob)
     })
