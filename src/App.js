@@ -19,18 +19,7 @@ function App() {
   return (
     <>
       <AppBar />
-      <Paper style={{maxWidth: 600, margin: '0 auto'}}>
-        {renderTab(tab)}
-        <img
-          src="/are.png"
-          style={{
-            maxWidth: '40%',
-            margin: '0 auto',
-            padding: 10,
-            display: 'block',
-          }}
-        />
-      </Paper>
+      <Paper style={{maxWidth: 600, margin: '0 auto'}}>{renderTab(tab)}</Paper>
     </>
   )
 }

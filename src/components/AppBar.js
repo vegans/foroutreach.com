@@ -53,7 +53,6 @@ function ButtonAppBar(props) {
               aria-label="simple tabs example">
               <Tab label="Videos" />
               <Tab label="Print" />
-              <Tab label="Slacktivism" />
             </Tabs>
             {online ? (
               <Tooltip title="Online">

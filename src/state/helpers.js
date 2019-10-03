@@ -11,6 +11,12 @@ export async function getVideos() {
   }))
 }
 
+export async function getSigns() {
+  const result = await fetch(process.env.REACT_APP_API_BASE + '/signs')
+  const json = await result.json()
+  return json
+}
+
 export async function getTags() {
   const result = await fetch(process.env.REACT_APP_API_BASE + '/tags')
   const json = await result.json()

@@ -25,6 +25,15 @@ function Home() {
           ))}
         </TableBody>
       </Table>
+      <img
+        src="/are.png"
+        style={{
+          maxWidth: '40%',
+          margin: '0 auto',
+          padding: 10,
+          display: 'block',
+        }}
+      />
     </>
   )
 }
