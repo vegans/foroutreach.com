@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/categories",
-      "handler": "Category.find",
+      "path": "/signfiles",
+      "handler": "Signfile.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/categories/count",
-      "handler": "Category.count",
+      "path": "/signfiles/count",
+      "handler": "Signfile.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/categories/:_id",
-      "handler": "Category.findOne",
+      "path": "/signfiles/:_id",
+      "handler": "Signfile.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/categories",
-      "handler": "Category.create",
+      "path": "/signfiles",
+      "handler": "Signfile.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/categories/:_id",
-      "handler": "Category.update",
+      "path": "/signfiles/:_id",
+      "handler": "Signfile.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/categories/:_id",
-      "handler": "Category.destroy",
+      "path": "/signfiles/:_id",
+      "handler": "Signfile.destroy",
       "config": {
         "policies": []
       }

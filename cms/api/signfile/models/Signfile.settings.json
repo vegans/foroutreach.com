@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "signfile",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "language": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "swedish",
+        "english",
+        "danish"
+      ]
+    },
+    "pdf": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "sign": {
+      "model": "sign",
+      "via": "signfiles"
+    }
+  }
+}
