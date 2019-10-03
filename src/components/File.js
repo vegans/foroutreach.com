@@ -84,7 +84,7 @@ function File({video, classes}) {
         <Typography variant="subtitle2">{title}</Typography>
         <div className={classes.seperator}>
           <Typography variant="caption">
-            <AvailableIcon url={video.remoteUrl} />
+            <AvailableIcon url={video.localUrl} />
             {!video.isDownloading && `${video.size} `}
             {video.progress && `Downloading...`}
             {!video.progress && video.isDownloading && `Processing...`}
