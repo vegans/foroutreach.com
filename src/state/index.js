@@ -37,8 +37,12 @@ const Videos = types
   .model('Videos', {
     allVideos: types.array(Video),
     tags: types.array(Tag),
+    tab: 0,
   })
   .actions(self => ({
+    setTab(tab) {
+      self.tab = Number(tab)
+    },
     afterHydration: flow(function* afterCreate() {
       const videos = yield getVideos()
       self.tags = yield getTags()
