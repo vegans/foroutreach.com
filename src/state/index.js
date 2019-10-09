@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import {types, flow} from 'mobx-state-tree'
 import localForage from 'localforage'
 import {persist} from 'mst-persist'
+import {detect} from 'detect-browser'
 import Video from './Video'
 import {getVideos, getTags} from './helpers'
 
@@ -33,10 +34,11 @@ const Tag = types
     },
   }))
 
-const Videos = types
-  .model('Videos', {
+const ForOutreach = types
+  .model('ForOutreach', {
     allVideos: types.array(Video),
     tags: types.array(Tag),
+    browser: types.frozen(),
   })
   .actions(self => ({
     afterHydration: flow(function* afterCreate() {
@@ -65,17 +67,24 @@ const Videos = types
     get selectedTags() {
       return self.tags.filter(tag => tag.selected).map(tag => tag.id)
     },
+    get isValidBrowser() {
+      return (
+        self.browser &&
+        self.browser.name &&
+        ['firefox', 'chrome'].includes(self.browser.name)
+      )
+    },
   }))
 
-const rootStore = Videos.create({
-  allVideos: [],
+const rootStore = ForOutreach.create({
+  browser: detect(),
 })
 
 export const State = ({children}) => (
   <Provider value={rootStore}>{children}</Provider>
 )
 
-persist('rootz', rootStore, {
+persist('@ForOutreach', rootStore, {
   storage: localForage,
   jsonify: false,
 }).then(() => {

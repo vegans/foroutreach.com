@@ -9,6 +9,7 @@ import StopIcon from '@material-ui/icons/Stop'
 import {lighten} from '@material-ui/core/styles/colorManipulator'
 import Badge from '@material-ui/core/Badge'
 import TagSelector from './TagSelector'
+import {useMst} from '../state'
 
 const toolbarStyles = theme => ({
   root: {
@@ -46,12 +47,17 @@ const toolbarStyles = theme => ({
 
 const TableToobar = props => {
   const {numSelected, classes, playerOpen, setPlayerOpen} = props
+  const {isValidBrowser} = useMst()
 
   return (
     <Toolbar className={classes.root}>
       <div className={classes.innerWrapper}>
         <div className={classes.title}>
-          <Typography variant="h6" id="tableTitle" />
+          <Typography>
+            {isValidBrowser
+              ? 'Select files below'
+              : 'This application is only tested in Chrome and Firefox'}
+          </Typography>
         </div>
         <div className={classes.spacer} />
         <div className={classes.actions}>
