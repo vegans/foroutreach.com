@@ -4,9 +4,9 @@ services:
   api:
     environment:
       - NODE_ENV=production
-      - VIRTUAL_HOST=outreach.maxmalm.se,api.foroutreach.com
+      - VIRTUAL_HOST=outreach-movies.foractivism.com
       - VIRTUAL_PORT=1337
-      - LETSENCRYPT_HOST=outreach.maxmalm.se,api.foroutreach.com
+      - LETSENCRYPT_HOST=outreach-movies.foractivism.com
       - LETSENCRYPT_EMAIL=benjick@dumfan.net
     restart: always
 
